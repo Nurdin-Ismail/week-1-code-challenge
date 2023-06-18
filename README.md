@@ -1,6 +1,8 @@
 # week-1-code-challenge
-## Toy Problems:
+## Author:
+Nurdin Ismail
 
+## Toy Problems:
 This repository contains solutions to three toy problems in JavaScript.
 
 ## Challenge 1: Student Grade Generator
