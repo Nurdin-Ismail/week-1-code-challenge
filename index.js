@@ -89,47 +89,47 @@ console.log(speedDetector(170))
 //Code:
 
 function netSalaryCalculator(basicSalary, benefits){
-    let payee
     
-    if (basicSalary <= 24000){
-     payee = (basicSalary + benefits) * 0.1;
+    let grossSalary= basicSalary + benefits
+    
 
-    } else if(basicSalary>24000 && basicSalary <= 32333){
-     payee = (basicSalary + benefits) * 0.25;
-
+   
+    //Calculating NSSF
+    if  (grossSalary > 18000) {
+        NSSFDeductions = 1080
+    } else if(grossSalary > 6000 && grossSalary <= 18000){
+        NSSFDeductions = 360 + (grossSalary - 6000) * 0.06
     } else{
-     payee = (basicSalary + benefits) * 0.3;
+        NSSFDeductions = grossSalary * 0.06
+
+    }
+
+     //Calculating payee
+    let taxableIncome = grossSalary - NSSFDeductions
+   let payee
+    if (taxableIncome <= 24000){
+         payee = taxableIncome * 0.01
+
+    } else if(taxableIncome >24000 && taxableIncome <= 32333){
+         payee= 2400 + (taxableIncome - 24000) *0.25
+    } else{
+        payee = Math.floor(2400 + 2083 + (taxableIncome - 32333)* 0.3)
     }
     
-
-  //Calculate NHIF deductions
-    let NHIFDeductions = basicSalary * 0.02;
-
-  //Calculate NSSF deductions
-    let NSSFDeductions = basicSalary * 0.12;
-
-  //Calculate gross salary
-    let grossSalary = basicSalary + benefits;
-
-  //Calculate net salary
-    let netSalary = grossSalary - payee - NHIFDeductions - NSSFDeductions;
-
+    let netSalary= grossSalary - payee - NSSFDeductions
     let obj = 
     
     {
         payee : payee,
-
-  
-        NHIF : NHIFDeductions,
+       
 
   
         NSSFDeductions : NSSFDeductions,
 
-
-        grossSalary : grossSalary,
-
-  
         netSalary : netSalary
+
+
+
     }
 
     return obj
@@ -137,7 +137,7 @@ function netSalaryCalculator(basicSalary, benefits){
 
 }
 
-console.log(netSalaryCalculator(45000, 5000))
+console.log(netSalaryCalculator(50000, 4000))
 
 
 
